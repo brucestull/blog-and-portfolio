@@ -1,5 +1,11 @@
 # Useful Commands and Links
 
+## Links
+
+* <http://localhost:8000/>
+* <http://localhost:8000/admin/>
+* <http://localhost:8000/blog/>
+
 ## Commands
 
 ### This Project

@@ -23,7 +23,7 @@
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand"
-                       href="https://github.com/FlynntKnapp/"
+                       href="https://github.com/brucestull/"
                        target="_blank">
                         <img src="https://flynnt-knapp-public.s3.amazonaws.com/ClayHeadProfile.jpg"
                              style="border-radius: 0.2em; width: 2em" />
@@ -56,6 +56,11 @@
                             <li class="nav-item">
                                 <a class="nav-link"
                                    href="{% url 'portfolio:projects' %}">Projects</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{% url 'blog:index' %}">Blog</a>
                             </li>
 
                             {% if user.registration_accepted %}

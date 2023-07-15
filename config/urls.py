@@ -47,10 +47,10 @@ urlpatterns = [
         "accounts/",
         include("django.contrib.auth.urls"),
     ),
-    # path(
-    #     "blog/",
-    #     include("blog.urls"),
-    # ),
+    path(
+        "blog/",
+        include("blog.urls"),
+    ),
     path(
         "portfolio/",
         include("portfolio.urls"),
