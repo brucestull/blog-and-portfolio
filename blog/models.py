@@ -57,7 +57,7 @@ class Post(models.Model):
 
     def display_categories(self):
         """
-        Returns a comma-separated list of `blog.Category` names.
+        Returns a comma-separated list of first 4 `blog.Category` names.
         """
         return ", ".join([category.name for category in self.categories.all()[:4]])
 
