@@ -123,4 +123,4 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
-THE_SITE_NAME = "FlynntKnapp Blog"
+THE_SITE_NAME = "FlynntKnapp"

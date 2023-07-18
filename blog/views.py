@@ -12,7 +12,7 @@ def blog_index(request):
     posts = Post.objects.all().order_by("-date_posted")
     context = {
         "the_site_name": THE_SITE_NAME,
-        "page_title": "Blog",
+        "page_title": "Knappings",
         "posts": posts,
     }
     return render(request, "blog/blog_index.html", context)
@@ -27,7 +27,7 @@ def blog_category(request, category):
     )
     context = {
         "the_site_name": THE_SITE_NAME,
-        "page_title": "Blog",
+        "page_title": "Knappings",
         "category": category,
         "posts": posts,
     }
@@ -54,7 +54,7 @@ def blog_detail(request, pk):
     comments = Comment.objects.filter(post=post)
     context = {
         "the_site_name": THE_SITE_NAME,
-        "page_title": "Blog",
+        "page_title": "Knappings",
         "post": post,
         "comments": comments,
         "form": form,

@@ -77,11 +77,11 @@ class PostModelTest(TestCase):
             username="DezziKitten", password="MeowMeow42", email="Dezzi@BigCat.Meow"
         )
 
-        cls.category1 = Category.objects.create(name="Category 1")
-        cls.category2 = Category.objects.create(name="Category 2")
-        cls.category3 = Category.objects.create(name="Category 3")
-        cls.category4 = Category.objects.create(name="Category 4")
-        cls.category5 = Category.objects.create(name="Category 5")
+        cls.category_1 = Category.objects.create(name="Category 1")
+        cls.category_2 = Category.objects.create(name="Category 2")
+        cls.category_3 = Category.objects.create(name="Category 3")
+        cls.category_4 = Category.objects.create(name="Category 4")
+        cls.category_5 = Category.objects.create(name="Category 5")
 
         cls.post = Post.objects.create(
             title="Test Post",
@@ -90,7 +90,7 @@ class PostModelTest(TestCase):
         )
 
         cls.post.categories.add(
-            cls.category1, cls.category2, cls.category3, cls.category4, cls.category5
+            cls.category_1, cls.category_2, cls.category_3, cls.category_4, cls.category_5
         )
 
     def test_dunder_string(self):
@@ -177,3 +177,47 @@ class PostModelTest(TestCase):
 
     def test_get_absolute_url(self):
         self.assertEqual(self.post.get_absolute_url(), "/blog/1/")
+
+
+class CommentModelTest(TestCase):
+    """
+    Tests for the `Comment` model.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        """
+        Set up non-modified objects used by all test methods.
+        """
+        cls.author = get_user_model().objects.create_user(
+            username="DezziKitten", password="MeowMeow42", email="Dezzi@BigCat.Meow"
+        )
+
+        cls.category_1 = Category.objects.create(name="Category 1")
+        cls.category_2 = Category.objects.create(name="Category 2")
+        cls.category_3 = Category.objects.create(name="Category 3")
+        cls.category_4 = Category.objects.create(name="Category 4")
+        cls.category_5 = Category.objects.create(name="Category 5")
+
+        cls.post = Post.objects.create(
+            title="Test Post",
+            body="Test Body.",
+            author=cls.author,
+        )
+
+        cls.post.categories.add(
+            cls.category_1, cls.category_2, cls.category_3, cls.category_4, cls.category_5
+        )
+
+        cls.comment_author = "Test Comment Author"
+        cls.comment_body = "Test Comment Body That's Really Long"
+        cls.comment = Comment.objects.create(
+            post=cls.post, author=cls.comment_author, body=cls.comment_body
+        )
+
+    def test_dunder_string(self):
+        """
+        `__str__` method should return the first 20 characters of the `body` field.
+        """
+        comment = Comment.objects.get(id=1)
+        self.assertEqual(str(comment), self.comment_body[:20])
