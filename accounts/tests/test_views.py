@@ -12,7 +12,7 @@ TEST_USERNAME_TWO = "AnotherCustomUser"
 TEST_PASSWORD_TWO = "TEST_PASSWORD_TWO"
 TEST_FIRST_NAME_TWO = "Another"
 
-THE_SITE_NAME = "FlynntKnapp Blog"
+THE_SITE_NAME = "FlynntKnapp"
 
 SIGN_UP_VIEW_URL = "/accounts/signup/"
 SIGN_UP_VIEW_NAME = "signup"
