@@ -7,7 +7,7 @@ from utils import get_database_config_variables
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['flynnt-knapp-djangostarter.herokuapp.com']
+ALLOWED_HOSTS = ['flynnts-knappings-6dfb9a7d65ac.herokuapp.com']
 
 
 MIDDLEWARE = MIDDLEWARE + ['whitenoise.middleware.WhiteNoiseMiddleware']
