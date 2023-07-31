@@ -27,7 +27,7 @@ def blog_category(request, category):
     )
     context = {
         "the_site_name": THE_SITE_NAME,
-        "page_title": "Knappings",
+        "page_title": "Flynnt Knappings",
         "category": category,
         "posts": posts,
     }
