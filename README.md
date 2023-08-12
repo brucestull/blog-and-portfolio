@@ -16,7 +16,7 @@
 
 ## Production Links
 
-* <https://flynnts-knappings-6dfb9a7d65ac.herokuapp.com/>
+* NOT_AVAILABLE_YET
 
 ## Development Links
 
