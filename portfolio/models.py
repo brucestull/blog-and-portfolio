@@ -77,7 +77,7 @@ class Project(TimestampMixin, models.Model):
         help_text="Add an image of the project.",
         # `upload_to` is a required argument for `ImageField`.
         # It specifies the path to which the uploaded file will be saved.
-        # upload_to="media/",
+        upload_to="media/",
         blank=True,
         null=True,
     )
