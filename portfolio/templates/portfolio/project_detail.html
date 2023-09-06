@@ -7,5 +7,10 @@
 {% endblock title %}
 
 {% block content %}
-    {{ project.title }} - <a href={% url 'portfolio:project-update' project.id %}>Edit</a>
+    {{ project.title }}
+    {% if user == project.owner %}
+        - <a href={% url 'portfolio:project-update' project.id %}>Edit</a>
+    {% endif %}
+    <hr>
+    {{ project.description }}
 {% endblock content %}

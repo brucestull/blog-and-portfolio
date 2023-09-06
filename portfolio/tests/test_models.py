@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from portfolio.models import TimestampMixin, Technology, Project
+from accounts.models import CustomUser
+from portfolio.models import (TimestampMixin, Technology, Project,)
 
 TEST_TECHNOLOGY_NAME_LABEL = "name"
 TEST_TECHNOLOGY_NAME_HELP_TEXT = "Enter the name of the technology."
@@ -20,6 +21,10 @@ TEST_TECHNOLOGY_DESCRIPTION_THREE = "PostgreSQL Database Management System"
 TEST_TECHNOLOGY_NAME_FOUR = "HTML"
 TEST_TECHNOLOGY_DESCRIPTION_FOUR = "HTML Markup Language"
 
+
+TEST_PROJECT_OWNER_LABEL = "owner"
+TEST_PROJECT_OWNER_HELP_TEXT = "Owner of this project."
+TEST_PROJECT_OWNER_RELATED_NAME = "projects"
 
 TEST_PROJECT_TITLE_LABEL = "title"
 TEST_PROJECT_TITLE_MAX_LENGTH = 100
@@ -180,17 +185,50 @@ class ProjectTest(TestCase):
 
         This specific function name `setUpTestData` is required by Django.
         """
+        cls.user = CustomUser.objects.create_user(
+            username="testuser",
+            email="testemail",
+            password="testpassword",
+        )
         cls.technology = Technology.objects.create(
             name=TEST_TECHNOLOGY_NAME_ONE,
             description=TEST_TECHNOLOGY_DESCRIPTION_ONE,
         )
 
         cls.project = Project.objects.create(
+            owner=cls.user,
             title=TEST_PROJECT_TITLE,
             description=TEST_PROJECT_DESCRIPTION,
             image=TEST_PROJECT_IMAGE,
         )
         cls.project.technology.set([cls.technology])
+
+    def test_owner_label(self):
+        """
+        `Project` model `owner` field label should be `owner`.
+        """
+        field_label = self.project._meta.get_field(
+            TEST_PROJECT_OWNER_LABEL
+        ).verbose_name
+        self.assertEqual(field_label, TEST_PROJECT_OWNER_LABEL)
+
+    def test_owner_help_text(self):
+        """
+        `Project` model `owner` field help text should be `Owner of this project.`.
+        """
+        field_help_text = self.project._meta.get_field(
+            TEST_PROJECT_OWNER_LABEL
+        ).help_text
+        self.assertEqual(field_help_text, TEST_PROJECT_OWNER_HELP_TEXT)
+
+    def test_owner_related_name(self):
+        """
+        `Project` model `owner` field related name should be `projects`.
+        """
+        related_name = self.project._meta.get_field(
+            TEST_PROJECT_OWNER_LABEL
+        ).related_query_name()
+        self.assertEqual(related_name, TEST_PROJECT_OWNER_RELATED_NAME)
 
     def test_title_label(self):
         """

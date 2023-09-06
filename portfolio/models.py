@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from config.settings.common import AUTH_USER_MODEL
+
 
 class TimestampMixin(models.Model):
     """
@@ -51,6 +53,12 @@ class Project(TimestampMixin, models.Model):
     A Project class is created to store information about a project.
     """
 
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL,
+        help_text="Owner of this project.",
+        on_delete=models.CASCADE,
+        related_name="projects",
+    )
     title = models.CharField(
         max_length=100,
     )

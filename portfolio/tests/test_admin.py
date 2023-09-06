@@ -1,5 +1,7 @@
 from django.test import TestCase
 
+from accounts.models import CustomUser
+
 from portfolio.models import Project, Technology
 from portfolio.admin import ProjectAdmin, TechnologyAdmin
 
@@ -55,6 +57,23 @@ class TestProjectAdmin(TestCase):
     Test the `ProjectAdmin` class.
     """
 
+    @classmethod
+    def setUpTestData(cls):
+        """
+        Create a `user` and `project` for testing.
+        """
+        cls.user = CustomUser.objects.create_user(
+            username="testuser",
+            email="testuser@email.app",
+            password="testpassword",
+        )
+        cls.project = Project.objects.create(
+            owner=cls.user,
+            title="Test Project",
+            description="Test description",
+            image="test.jpg",
+        )
+
     def test_project_admin_truncated_description_method_returns_description(self):
         """
         `ProjectAdmin` `truncated_description()` method should return the
@@ -62,6 +81,7 @@ class TestProjectAdmin(TestCase):
         """
         project_admin = ProjectAdmin(Project, None)
         project = Project.objects.create(
+            owner=self.user,
             title="Test Project",
             description="Test description",
             image="test.jpg",
@@ -83,6 +103,7 @@ class TestProjectAdmin(TestCase):
         )
         project_admin = ProjectAdmin(Project, None)
         project = Project.objects.create(
+            owner=self.user,
             title="Test Project",
             description=test_description_more_than_30_characters,
             image="test.jpg",
