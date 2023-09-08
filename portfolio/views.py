@@ -49,7 +49,7 @@ class ProjectUpdateView(UserPassesTestMixin, UpdateView):
 
 class ProjectDetailView(DetailView):
     """
-    Detail view for models.Project model.
+    Detail view for `models.Project` model.
     """
 
     model = models.Project
@@ -62,10 +62,10 @@ class ProjectDetailView(DetailView):
 
 class ProjectListView(ListView):
     """
-    List view for models.Project model.
+    List view for `models.Project` model.
     """
 
-    queryset = models.Project.objects.all()
+    queryset = models.Project.objects.all().order_by("-created_at")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
