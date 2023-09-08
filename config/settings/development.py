@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from config.settings.common import *
 
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG", True)
 
 
 ALLOWED_HOSTS = ["localhost"]

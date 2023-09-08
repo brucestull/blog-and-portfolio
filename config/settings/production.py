@@ -4,7 +4,7 @@ from config.settings.common import *
 from utils import get_database_config_variables
 
 
-DEBUG = False
+DEBUG = os.getenv("DEBUG", False)
 
 
 ALLOWED_HOSTS = ['flynnt-knapp-portfolio-e7f84c16765f.herokuapp.com']
