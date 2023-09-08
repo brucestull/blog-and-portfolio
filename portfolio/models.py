@@ -96,7 +96,9 @@ class Project(TimestampMixin, models.Model):
 
     def display_technologies(self):
         """
-        Creates a string for the technologies. This will allow us to display multiple `Technology`'s in the `Project` list view.
+        Creates a string for the technologies. This will allow us to
+        display multiple `Technology`'s in the `Project` list view.
         """
-        # Limit the number of technologies to 3 and then join them with a comma and a space to form a string.
+        # Limit the number of technologies to 3 and then join them with
+        # a comma and a space to form a string.
         return ", ".join(technology.name for technology in self.technology.all()[:3])
