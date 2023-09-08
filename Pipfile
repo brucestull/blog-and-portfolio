@@ -12,7 +12,9 @@ psycopg2 = "==2.9.5"
 tzdata = "==2022.7"
 coverage = "==7.2.7"
 python-dotenv = "==1.0.0"
-pillow = "*"
+pillow = "==10.0.0"
+django-storages = "==1.14"
+boto3 = "==1.28.43"
 
 [dev-packages]
 
