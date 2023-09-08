@@ -8,10 +8,19 @@
 {% endblock title %}
 
 {% block content %}
+<h2>
     {{ project.title }}
     {% if user == project.owner %}
         - <a href={% url 'portfolio:project-update' project.id %}>Edit</a>
     {% endif %}
+</h2>
+<img
+    style="max-width: 25%; box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);"
+        {% if project.image %}
+            src="{{ project.image.url }}"
+        {% else %}
+            src="{% static 'portfolio/images/placeholder.png' %}"
+        {% endif %}>
     <hr>
-    {{ project.description }}
+    <p>{{ project.description|linebreaksbr }}</p>
 {% endblock content %}
