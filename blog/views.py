@@ -7,7 +7,7 @@ from blog.forms import CommentForm
 
 def blog_index(request):
     """
-    View for the `blog.Blog` list view.
+    View for the `blog.Post` list view.
     """
     posts = Post.objects.all().order_by("-date_posted")
     context = {
@@ -20,7 +20,7 @@ def blog_index(request):
 
 def blog_category(request, category):
     """
-    View for the `blog.Blog` list view filtered by `category`.
+    View for the `blog.Post` list view filtered by `category`.
     """
     posts = Post.objects.filter(categories__name__icontains=category).order_by(
         "-date_posted"
@@ -36,7 +36,7 @@ def blog_category(request, category):
 
 def blog_detail(request, pk):
     """
-    View for the `blog.Blog` detail view.
+    View for the `blog.Post` detail view.
     """
     post = Post.objects.get(pk=pk)
 
