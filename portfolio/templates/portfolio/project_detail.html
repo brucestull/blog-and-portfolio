@@ -22,5 +22,10 @@
             src="{% static 'portfolio/images/placeholder.png' %}"
         {% endif %}>
     <hr>
+    {% for technology in project.technology.all %}
+        {{ technology.name}}{% if not forloop.last %} | {% endif %}
+    {% endfor %}
+    <br>
+    <br>
     <p>{{ project.description|linebreaksbr }}</p>
 {% endblock content %}
