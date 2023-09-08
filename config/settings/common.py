@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.admindocs",
     "blog.apps.BlogConfig",
     "portfolio.apps.PortfolioConfig",
+    "storages",
 ]
 
 MIDDLEWARE = [
