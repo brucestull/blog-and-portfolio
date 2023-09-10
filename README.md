@@ -16,7 +16,10 @@
 
 ## Production Links
 
-* NOT_AVAILABLE_YET
+* Portfolio Projects QR Code:
+
+  ![FlynntKnappPortfolioAndBlog](https://github.com/brucestull/blog-and-portfolio/assets/47562501/6a57aade-d077-4de2-97ec-50033b1ca64e)
+
 
 ## Development Links
 
