@@ -73,7 +73,7 @@ class Project(TimestampMixin, models.Model):
         verbose_name="technologies",
         related_name="projects",
     )
-    image = models.ImageField(
+    main_image = models.ImageField(
         help_text="Add an image of the project.",
         # `upload_to` is a required argument for `ImageField`.
         # It specifies the path to which the uploaded file will be saved.
