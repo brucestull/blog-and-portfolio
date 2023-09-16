@@ -9,58 +9,54 @@ class CategoryModelTest(TestCase):
     Tests for the `Category` model.
     """
 
-    @classmethod
-    def setUpTestData(cls):
+    def test_name_verbose_name(self):
         """
-        Set up non-modified objects used by all test methods.
+        `name` verbose_name should be 'Category Name'.
         """
-        Category.objects.create(
-            name="Test Category",
-        )
+        category_verbose_name = Category._meta.get_field("name").verbose_name
+        self.assertEqual(category_verbose_name, "Category Name")
 
-    # def __str__(self):
-    #     return self.name
-    def test_dunder_string(self):
-        """
-        `__str__` method should return the name.
-        """
-        category = Category.objects.get(id=1)
-        self.assertEqual(str(category), category.name)
-
-    # max_length=20
     def test_name_max_length(self):
         """
         `name` max_length should be 20.
         """
-        category = Category.objects.get(id=1)
-        max_length = category._meta.get_field("name").max_length
-        self.assertEqual(max_length, 20)
+        category_max_length = Category._meta.get_field("name").max_length
+        self.assertEqual(category_max_length, 20)
 
-    # verbose_name='Word to describe the Category'
-    def test_name_label(self):
+    def test_date_created_verbose_name(self):
         """
-        `name` label should be 'Word to describe the Category'.
+        `date_created` verbose_name should be 'Date the Category was created'.
         """
-        category = Category.objects.get(id=1)
-        field_label = category._meta.get_field("name").verbose_name
-        self.assertEqual(field_label, "Word to describe the Category")
+        date_created_verbose_name = Category._meta.get_field(
+            "date_created"
+        ).verbose_name
+        self.assertEqual(
+            date_created_verbose_name,
+            "Date the Category was created"
+        )
 
-    # verbose_name='Date the Category was created'
-    def test_date_created_label(self):
+    def test_date_created_auto_now_add_true(self):
         """
-        `date_created` label should be 'Date the Category was created'.
+        `date_created` auto_now_add should be True.
         """
-        category = Category.objects.get(id=1)
-        field_label = category._meta.get_field("date_created").verbose_name
-        self.assertEqual(field_label, "Date the Category was created")
+        date_created_auto_now_add = Category._meta.get_field(
+            "date_created"
+        ).auto_now_add
+        self.assertTrue(date_created_auto_now_add)
 
-    # verbose_name_plural = 'categories'
+    def test_dunder_string_method(self):
+        """
+        `__str__` method should return the name.
+        """
+        self.category = Category.objects.create(name="Test Category")
+        self.assertEqual(str(self.category), "Test Category")
+
     def test_verbose_name_plural(self):
         """
-        `verbose_name_plural` should be 'categories'.
+        `verbose_name_plural` should be 'Categorie(s)'.
         """
-        category = Category.objects.get(id=1)
-        self.assertEqual(category._meta.verbose_name_plural, "categories")
+        verbose_name_plural = Category._meta.verbose_name_plural
+        self.assertEqual(verbose_name_plural, "Categorie(s)")
 
 
 class PostModelTest(TestCase):

@@ -10,16 +10,16 @@ class Category(models.Model):
     """
 
     name = models.CharField(
+        verbose_name="Category Name",
         max_length=20,
-        verbose_name="Word to describe the Category",
     )
     date_created = models.DateTimeField(
-        auto_now_add=True,
         verbose_name="Date the Category was created",
+        auto_now_add=True,
     )
 
     class Meta:
-        verbose_name_plural = "categories"
+        verbose_name_plural = "Categorie(s)"
 
     def __str__(self):
         return self.name
