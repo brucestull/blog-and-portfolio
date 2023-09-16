@@ -6,12 +6,13 @@ from django.views.generic.edit import (
 )
 from django.contrib.auth.mixins import UserPassesTestMixin
 
+from .mixins import RegistrationAcceptedMixin
 from .forms import ProjectForm
 from config.settings.common import THE_SITE_NAME
 from . import models
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(RegistrationAcceptedMixin, CreateView):
     """
     Create view for `models.Project` model.
     """
