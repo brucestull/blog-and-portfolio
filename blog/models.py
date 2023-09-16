@@ -10,16 +10,16 @@ class Category(models.Model):
     """
 
     name = models.CharField(
+        verbose_name="Category Name",
         max_length=20,
-        verbose_name="Word to describe the Category",
     )
     date_created = models.DateTimeField(
-        auto_now_add=True,
         verbose_name="Date the Category was created",
+        auto_now_add=True,
     )
 
     class Meta:
-        verbose_name_plural = "categories"
+        verbose_name_plural = "Categorie(s)"
 
     def __str__(self):
         return self.name
@@ -31,20 +31,20 @@ class Post(models.Model):
     """
 
     title = models.CharField(
-        max_length=100,
         verbose_name="Title of the Post",
+        max_length=100,
     )
     body = models.TextField(
         verbose_name="Body of the Post",
     )
     date_posted = models.DateTimeField(
-        auto_now_add=True,
         verbose_name="Date the Post was posted",
+        auto_now_add=True,
     )
     author = models.ForeignKey(
         AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
         verbose_name="Author of the Post",
+        on_delete=models.CASCADE,
     )
     categories = models.ManyToManyField(
         Category,
@@ -59,7 +59,9 @@ class Post(models.Model):
         """
         Returns a comma-separated list of first 4 `blog.Category` names.
         """
-        return ", ".join([category.name for category in self.categories.all()[:4]])
+        return ", ".join(
+            [category.name for category in self.categories.all()[:4]]
+        )
 
     display_categories.short_description = "Categories"
 
@@ -77,18 +79,19 @@ class Comment(models.Model):
 
     post = models.ForeignKey(
         Post,
-        on_delete=models.CASCADE,
         related_name="comments",
+        on_delete=models.CASCADE,
     )
     author = models.CharField(
+        # TODO: Add `AUTH_USER_MODEL` relationship so only authenticated
+        # users can comment.
         max_length=60,
     )
-    # author = models.ForeignKey(
-    #     AUTH_USER_MODEL,
-    #     on_delete=models.CASCADE,
-    # )
-    body = models.TextField()
+    body = models.TextField(
+        verbose_name="Body of the Comment",
+    )
     date_posted = models.DateTimeField(
+        verbose_name="Date the Comment was posted",
         auto_now_add=True,
     )
 
