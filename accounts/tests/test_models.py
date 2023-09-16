@@ -1,12 +1,7 @@
 from django.test import TestCase
-from django.db import models
+from django.contrib.auth import get_user_model
 
 from accounts.models import CustomUser
-
-CUSTOM_USER_REGISTRATION_ACCEPTED_LABEL = "registration accepted"
-CUSTOM_USER_REGISTRATION_ACCEPTED_HELP_TEXT = "Designates whether user's registration has been accepted by an admin."
-
-TEST_USERNAME_ONE = 'ACustomUser'
 
 
 class CustomUserModelTest(TestCase):
@@ -14,41 +9,52 @@ class CustomUserModelTest(TestCase):
     Tests for `CustomUser` model.
     """
 
-    @classmethod
-    def setUpTestData(cls):
+    def test_registration_accepted_is_boolean_field(self):
         """
-        Set up non-modified objects used by all test methods.
+        `registration_accepted` field should be a `BooleanField`.
+        """
+        custom_user_field_type = CustomUser._meta.get_field(
+            "registration_accepted").get_internal_type()
+        self.assertEqual(custom_user_field_type, "BooleanField")
 
-        This specific function name `setUpTestData` is required by Django.
+    def test_registration_accepted_verbose_name(self):
         """
-        user = CustomUser.objects.create(
-            username=TEST_USERNAME_ONE,
-        )
-
-    def test_registration_accepted_label(self):
+        `registration_accepted` field should have verbose name of
+        'Registration Accepted'.
         """
-        `CustomUser` model `registration_accepted` field label should be `registration accepted`.
-        """
-        user = CustomUser.objects.get(id=1)
-        field_label = user._meta.get_field('registration_accepted').verbose_name
-        self.assertEqual(field_label, CUSTOM_USER_REGISTRATION_ACCEPTED_LABEL)
+        custom_user_verbose_name = CustomUser._meta.get_field(
+            "registration_accepted").verbose_name
+        self.assertEqual(custom_user_verbose_name, "Registration Accepted")
 
     def test_registration_accepted_help_text(self):
         """
-        `CustomUser` model `registration_accepted` field help text should be `Designates whether user's registration has been accepted by an admin.`.
+        `registration_accepted` field should have help text of
+        'Designates whether user's registration has been accepted by an
+        admin.'.
         """
-        user = CustomUser.objects.get(id=1)
-        field_help_text = user._meta.get_field('registration_accepted').help_text
-        self.assertEqual(field_help_text, CUSTOM_USER_REGISTRATION_ACCEPTED_HELP_TEXT)
+        custom_user_help_text = CustomUser._meta.get_field(
+            "registration_accepted").help_text
+        self.assertEqual(
+            custom_user_help_text,
+            "Designates whether user's registration has been accepted "
+            "by an admin."
+        )
 
     def test_registration_accepted_default_false(self):
-        user = CustomUser.objects.get(id=1)
-        field_default = user._meta.get_field('registration_accepted').default
-        self.assertEqual(field_default, False)
+        """
+        `registration_accepted` field should default to False.
+        """
+        custom_user_default = CustomUser._meta.get_field(
+            "registration_accepted").default
+        self.assertFalse(custom_user_default)
 
     def test_dunder_string_method(self):
         """
         `CustomUser` model `__str__` method should return `username`.
         """
-        user = CustomUser.objects.get(id=1)
-        self.assertEqual(user.__str__(), user.username)
+        self.custom_user_01 = get_user_model().objects.create_user(
+            username="DezziKitten",
+            email="DezziKitten@meowmeow.scratch",
+            password="MeowMeow42",
+        )
+        self.assertEqual(str(self.custom_user_01), "DezziKitten")
