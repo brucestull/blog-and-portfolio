@@ -18,17 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from django.views.generic.base import TemplateView
+from django.views.generic.base import RedirectView
 
-from config.settings.common import THE_SITE_NAME
 
 urlpatterns = [
     path(
         "",
-        TemplateView.as_view(
-            template_name="home.html",
-            extra_context={"the_site_name": THE_SITE_NAME},
-        ),
+        RedirectView.as_view(pattern_name="portfolio:projects"),
         name="home",
     ),
     path(
@@ -59,4 +55,3 @@ urlpatterns = [
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
