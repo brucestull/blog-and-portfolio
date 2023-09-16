@@ -71,7 +71,7 @@ class TestProjectAdmin(TestCase):
             owner=cls.user,
             title="Test Project",
             description="Test description",
-            image="test.jpg",
+            main_image="test.jpg",
         )
 
     def test_project_admin_truncated_description_method_returns_description(self):
@@ -84,7 +84,7 @@ class TestProjectAdmin(TestCase):
             owner=self.user,
             title="Test Project",
             description="Test description",
-            image="test.jpg",
+            main_image="test.jpg",
         )
         self.assertEqual(
             project_admin.truncated_description(project),
@@ -106,7 +106,7 @@ class TestProjectAdmin(TestCase):
             owner=self.user,
             title="Test Project",
             description=test_description_more_than_30_characters,
-            image="test.jpg",
+            main_image="test.jpg",
         )
         truncated_description = test_description_more_than_30_characters[:30]
         self.assertEqual(

@@ -63,7 +63,8 @@ class TimestampMixinTest(TestCase):
         """
         `TimestampMixin` model `created_at` field `auto_now_add` should be `True`.
         """
-        auto_now_add = TimestampMixin._meta.get_field("created_at").auto_now_add
+        auto_now_add = TimestampMixin._meta.get_field(
+            "created_at").auto_now_add
         self.assertTrue(auto_now_add)
 
     def test_updated_at_label(self):
@@ -149,7 +150,8 @@ class TechnologyTest(TestCase):
         field_help_text = self.technology._meta.get_field(
             TEST_TECHNOLOGY_DESCRIPTION_LABEL
         ).help_text
-        self.assertEqual(field_help_text, TEST_TECHNOLOGY_DESCRIPTION_HELP_TEXT)
+        self.assertEqual(
+            field_help_text, TEST_TECHNOLOGY_DESCRIPTION_HELP_TEXT)
 
     def test_dunder_string_method(self):
         """
@@ -199,7 +201,7 @@ class ProjectTest(TestCase):
             owner=cls.user,
             title=TEST_PROJECT_TITLE,
             description=TEST_PROJECT_DESCRIPTION,
-            image=TEST_PROJECT_IMAGE,
+            main_image=TEST_PROJECT_IMAGE,
         )
         cls.project.technology.set([cls.technology])
 
@@ -243,7 +245,8 @@ class ProjectTest(TestCase):
         """
         `Project` model `title` field max length should be 100.
         """
-        max_length = self.project._meta.get_field(TEST_PROJECT_TITLE_LABEL).max_length
+        max_length = self.project._meta.get_field(
+            TEST_PROJECT_TITLE_LABEL).max_length
         self.assertEqual(max_length, TEST_PROJECT_TITLE_MAX_LENGTH)
 
     def test_description_label(self):
@@ -282,21 +285,36 @@ class ProjectTest(TestCase):
         ).help_text
         self.assertEqual(help_text, TEST_PROJECT_TECHNOLOGY_HELP_TEXT)
 
-    def test_image_label(self):
+    def test_main_image_field(self):
         """
-        `Project` model `image` field label should be `image`.
-        """
-        field_label = self.project._meta.get_field(
-            TEST_PROJECT_IMAGE_LABEL
-        ).verbose_name
-        self.assertEqual(field_label, TEST_PROJECT_IMAGE_LABEL)
+        `Project` model `main_image` field should have the following attributes:
 
-    def test_image_help_text(self):
+        - `verbose_name` should be "Main Image"
+        - `help_text` should be "Add an image of the project."
+        - `upload_to` should be "portfolio/"
+        - `blank` should be "True"
+        - `null` should be "True"
         """
-        `Project` model `image` field help text should be `Add an image of the project.`.
-        """
-        help_text = self.project._meta.get_field(TEST_PROJECT_IMAGE_LABEL).help_text
-        self.assertEqual(help_text, TEST_PROJECT_IMAGE_HELP_TEXT)
+        main_image_verbose_name = self.project._meta.get_field(
+            "main_image"
+        ).verbose_name
+        self.assertEqual(main_image_verbose_name, "Main Image")
+        main_image_help_text = self.project._meta.get_field(
+            "main_image"
+        ).help_text
+        self.assertEqual(main_image_help_text, "Add an image of the project.")
+        main_image_upload_to = self.project._meta.get_field(
+            "main_image"
+        ).upload_to
+        self.assertEqual(main_image_upload_to, "portfolio/")
+        main_image_blank = self.project._meta.get_field(
+            "main_image"
+        ).blank
+        self.assertTrue(main_image_blank)
+        main_image_null = self.project._meta.get_field(
+            "main_image"
+        ).null
+        self.assertTrue(main_image_null)
 
     # TODO: Fix this test.
     # def test_image_path(self):

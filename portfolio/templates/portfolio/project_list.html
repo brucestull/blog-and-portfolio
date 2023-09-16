@@ -16,8 +16,8 @@
             <div class="card mb-2 flex-fill">
                 <img
                     class="card-img-top"
-                    {% if project.image %}
-                        src="{{ project.image.url }}"
+                    {% if project.main_image %}
+                        src="{{ project.main_image.url }}"
                     {% else %}
                         src="{% static 'portfolio/images/placeholder.png' %}"
                     {% endif %}>

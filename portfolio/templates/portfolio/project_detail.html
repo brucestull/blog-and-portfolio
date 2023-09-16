@@ -16,8 +16,8 @@
 </h2>
 <img
     style="max-width: 25%; box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);"
-        {% if project.image %}
-            src="{{ project.image.url }}"
+        {% if project.main_image %}
+            src="{{ project.main_image.url }}"
         {% else %}
             src="{% static 'portfolio/images/placeholder.png' %}"
         {% endif %}>

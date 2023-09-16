@@ -35,7 +35,7 @@ class TestProjectUpdateView(TestCase):
             owner=cls.user1,
             title="Test Project",
             description="Test description",
-            image="test.jpg",
+            main_image="test.jpg",
         )
 
     def test_view_get_method_returns_200(self):
@@ -84,7 +84,8 @@ class TestProjectUpdateView(TestCase):
         `ProjectUpdateView` should be accessible by URL.
         """
         self.client.login(username="testuser1", password="testpassword1")
-        response = self.client.get(f"/portfolio/projects/{self.project.pk}/update/")
+        response = self.client.get(
+            f"/portfolio/projects/{self.project.pk}/update/")
         self.assertEqual(response.status_code, 200)
 
     def test_view_accessible_only_by_owner(self):

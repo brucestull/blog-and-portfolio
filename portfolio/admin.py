@@ -18,6 +18,7 @@ class TechnologyAdmin(admin.ModelAdmin):
         "created_at",
     )
 
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     """
@@ -31,7 +32,7 @@ class ProjectAdmin(admin.ModelAdmin):
         "title",
         "truncated_description",
         "display_technologies",
-        "image",
+        "main_image",
         "created_at",
     )
 
