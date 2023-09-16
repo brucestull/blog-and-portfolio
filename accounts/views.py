@@ -2,9 +2,15 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
 
-from accounts.forms import CustomUserCreationForm, CustomUserChangeForm
+from accounts.forms import (
+    CustomUserCreationForm,
+    CustomUserChangeForm
+)
 from accounts.models import CustomUser
 from config.settings.common import THE_SITE_NAME
 
@@ -28,7 +34,8 @@ class CustomUserSignUpView(CreateView):
 
 class CustomLoginView(LoginView):
     """
-    Override the default login view. This will allow us to add the site name to the context and then display it on the page.
+    Override the default login view. This will allow us to add the site
+    name to the context and then display it on the page.
     """
 
     def get_context_data(self, **kwargs):
@@ -40,7 +47,11 @@ class CustomLoginView(LoginView):
         return context
 
 
-class CustomUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class CustomUserUpdateView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    UpdateView
+):
     """
     View for user to update an existing account.
     """
@@ -65,11 +76,16 @@ class CustomUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return context
 
 
-class CustomUserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+class CustomUserDetailView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    DetailView
+):
     """
     View for user to view their account details.
 
-    We are only specifying the `model` here because we are using the default template name that is created by Django.
+    We are only specifying the `model` here because we are using the
+    default template name that is created by Django.
     """
     model = CustomUser
 
@@ -81,7 +97,8 @@ class CustomUserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         """
-        Get the parent `context` and add `the_site_name` and/or `page_title` to the it.
+        Get the parent `context` and add `the_site_name` and/or `page_title`
+        to the it.
         """
         context = super().get_context_data(**kwargs)
         # context['the_site_name'] = THE_SITE_NAME
