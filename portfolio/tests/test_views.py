@@ -7,7 +7,6 @@ from accounts.models import CustomUser
 
 from portfolio.models import (
     Project,
-    Technology,
 )
 
 
@@ -116,18 +115,3 @@ class TestProjectUpdateView(TestCase):
             ),
         )
         self.assertEqual(response.status_code, 403)
-
-    # def test_update_project_view_post(self):
-    #     self.client.login(username='testuser1', password='testpass1')
-    #     response = self.client.post(reverse('portfolio:project-update', args=[self.project.pk]), {
-    #         'title': 'Updated Test Project',
-    #         'description': 'Updated test project description',
-    #         'owner': self.project.owner.pk
-    #     })
-    #     self.assertEqual(response.status_code, 302)
-    #     self.assertRedirects(response, f"/accounts/login/?next={reverse('portfolio:project-update', args=[self.project.pk])}")
-    #     updated_project = Project.objects.get(pk=self.project.pk)
-    #     # TODO: Fix this test, or the code
-    #     self.assertEqual(updated_project.title, 'Updated Test Project')
-    #     # TODO: Fix this test, or the code
-    #     self.assertEqual(updated_project.description, 'Updated test project description')
