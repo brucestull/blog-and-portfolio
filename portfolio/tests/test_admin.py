@@ -11,6 +11,18 @@ class TestTechnologyAdmin(TestCase):
     Test the `TechnologyAdmin` class.
     """
 
+    def test_list_display(self):
+        """
+        `list_display` should contain the following fields:
+        - `name`
+        - `description`
+        - `created_at`
+        """
+        technology_admin = TechnologyAdmin(Technology, None)
+        self.assertIn("name", technology_admin.list_display)
+        self.assertIn("description", technology_admin.list_display)
+        self.assertIn("created_at", technology_admin.list_display)
+
     def test_get_fieldsets_is_list_of_tuples(self):
         """
         `TechnologyAdmin` `get_fieldsets()` method should return a list
@@ -51,6 +63,16 @@ class TestTechnologyAdmin(TestCase):
         fieldsets_as_list = list(fieldsets)
         self.assertIn("created_at", fieldsets_as_list[0][1]["fields"][2])
 
+    def test_readonly_fields(self):
+        """
+        `readonly_fields` should contain the following fields:
+        - `created_at`
+        - `updated_at`
+        """
+        technology_admin = TechnologyAdmin(Technology, None)
+        self.assertIn("created_at", technology_admin.readonly_fields)
+        self.assertIn("updated_at", technology_admin.readonly_fields)
+
 
 class TestProjectAdmin(TestCase):
     """
@@ -74,7 +96,33 @@ class TestProjectAdmin(TestCase):
             main_image="test.jpg",
         )
 
-    def test_project_admin_truncated_description_method_returns_description(self):
+    def test_list_display(self):
+        """
+        `list_display` should contain the following fields:
+        - `title`
+        - `truncated_description`
+        - `display_technologies`
+        - `main_image`
+        - `created_at`
+        """
+        project_admin = ProjectAdmin(Project, None)
+        self.assertIn("title", project_admin.list_display)
+        self.assertIn("truncated_description", project_admin.list_display)
+        self.assertIn("display_technologies", project_admin.list_display)
+        self.assertIn("main_image", project_admin.list_display)
+        self.assertIn("created_at", project_admin.list_display)
+
+    def test_readonly_fields(self):
+        """
+        `readonly_fields` should contain the following fields:
+        - `created_at`
+        - `updated_at`
+        """
+        project_admin = ProjectAdmin(Project, None)
+        self.assertIn("created_at", project_admin.readonly_fields)
+        self.assertIn("updated_at", project_admin.readonly_fields)
+
+    def test_truncated_description_method_returns_description(self):
         """
         `ProjectAdmin` `truncated_description()` method should return the
         `description` when it is less than or equal to 30 characters.
@@ -91,7 +139,7 @@ class TestProjectAdmin(TestCase):
             project.description,
         )
 
-    def test_project_admin_truncated_description_method_returns_truncated_description(
+    def test_truncated_description_method_returns_truncated_description(
         self,
     ):
         """

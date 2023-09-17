@@ -8,14 +8,14 @@ class TechnologyAdmin(admin.ModelAdmin):
     """
     `ModelAdmin` class for the `Technology` model.
     """
-    readonly_fields = (
-        "created_at",
-        "updated_at",
-    )
     list_display = (
         "name",
         "description",
         "created_at",
+    )
+    readonly_fields = (
+        "created_at",
+        "updated_at",
     )
 
 
@@ -24,16 +24,16 @@ class ProjectAdmin(admin.ModelAdmin):
     """
     `ModelAdmin` class for the `Project` model.
     """
-    readonly_fields = (
-        "created_at",
-        "updated_at",
-    )
     list_display = (
         "title",
         "truncated_description",
         "display_technologies",
         "main_image",
         "created_at",
+    )
+    readonly_fields = (
+        "created_at",
+        "updated_at",
     )
 
     def truncated_description(self, obj):
