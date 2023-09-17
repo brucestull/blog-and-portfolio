@@ -10,9 +10,11 @@ class TimestampMixin(models.Model):
     """
 
     created_at = models.DateTimeField(
+        verbose_name="Created At",
         auto_now_add=True,
     )
     updated_at = models.DateTimeField(
+        verbose_name="Updated At",
         auto_now=True,
     )
 
@@ -29,10 +31,12 @@ class Technology(TimestampMixin, models.Model):
     """
 
     name = models.CharField(
+        verbose_name="Technology Name",
         help_text="Enter the name of the technology.",
         max_length=30,
     )
     description = models.TextField(
+        verbose_name="Technology Description",
         help_text="Enter a description of the technology.",
         blank=True,
         null=True,
@@ -45,7 +49,7 @@ class Technology(TimestampMixin, models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "technologies"
+        verbose_name_plural = "Technologies"
 
 
 class Project(TimestampMixin, models.Model):
@@ -55,22 +59,26 @@ class Project(TimestampMixin, models.Model):
 
     owner = models.ForeignKey(
         AUTH_USER_MODEL,
+        verbose_name="Owner",
         help_text="Owner of this project.",
         on_delete=models.CASCADE,
         related_name="projects",
     )
     title = models.CharField(
+        verbose_name="Project Title",
+        help_text="Enter the title of the project.",
         max_length=100,
     )
     description = models.TextField(
+        verbose_name="Project Description",
         help_text="Enter a description of the project.",
         blank=True,
         null=True,
     )
     technology = models.ManyToManyField(
         Technology,
+        verbose_name="Technologies",
         help_text="Select a technology for this project.",
-        verbose_name="technologies",
         related_name="projects",
     )
     main_image = models.ImageField(
@@ -102,4 +110,6 @@ class Project(TimestampMixin, models.Model):
         """
         # Limit the number of technologies to 3 and then join them with
         # a comma and a space to form a string.
-        return ", ".join(technology.name for technology in self.technology.all()[:3])
+        return ", ".join(
+            technology.name for technology in self.technology.all()[:3]
+        )
