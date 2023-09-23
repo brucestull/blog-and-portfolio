@@ -6,6 +6,7 @@ from portfolio.models import (
     TimestampMixin,
     Technology,
     Project,
+    ProjectImage,
 )
 
 
@@ -368,6 +369,16 @@ class ProjectTest(TestCase):
             "DezziKitten's Test Project",
         )
 
+    def test_get_absolute_url_method(self):
+        """
+        `Project` model `get_absolute_url` method should return
+        `/portfolio/<project_id>/`.
+        """
+        self.assertEqual(
+            self.project_01.get_absolute_url(),
+            f"/portfolio/projects/{self.project_01.id}/",
+        )
+
     def test_display_technologies_method_with_one_technology(self):
         """
         `Project` model `display_technologies` method should return
@@ -398,3 +409,138 @@ class ProjectTest(TestCase):
             f"{self.technology_01.name}, {self.technology_02.name}, "
             f"{self.technology_03.name}",
         )
+
+
+class ProjectImageModelTest(TestCase):
+    """
+    Tests for `ProjectImage` model.
+    """
+
+    def test_project_field(self):
+        """
+        `ProjectImage` model `project` field should have the following
+        attributes:
+
+        - `verbose_name` should be "Project"
+        - `help_text` should be "Project to which this image belongs."
+        - `on_delete` should be `models.CASCADE`
+        - `related_name` should be `images`
+        """
+        project_verbose_name = ProjectImage._meta.get_field(
+            "project").verbose_name
+        self.assertEqual(project_verbose_name, "Project")
+        project_help_text = ProjectImage._meta.get_field(
+            "project").help_text
+        self.assertEqual(
+            project_help_text,
+            "Project to which this image belongs.",
+        )
+        project_on_delete = ProjectImage._meta.get_field(
+            "project")
+        self.assertEqual(
+            project_on_delete.remote_field.on_delete,
+            d_db_models.CASCADE
+        )
+        project_related_name = ProjectImage._meta.get_field(
+            "project").related_query_name()
+        self.assertEqual(project_related_name, "images")
+
+    # def test_project_uses_project_model(self):
+    #     """
+    #     `ProjectImage` model `project` field should use `Project` model.
+    #     """
+    #     project_field = ProjectImage._meta.get_field("project")
+    #     self.assertEqual(project_field.related_model, Project)
+
+    # def test_project_verbose_name(self):
+    #     """
+    #     `ProjectImage` model `project` field `verbose_name` should be
+    #     "Project".
+    #     """
+    #     project_verbose_name = ProjectImage._meta.get_field(
+    #         "project").verbose_name
+    #     self.assertEqual(project_verbose_name, "Project")
+
+    # def test_project_help_text(self):
+    #     """
+    #     `ProjectImage` model `project` field help text should be
+    #     "Project to which this image belongs.".
+    #     """
+    #     project_help_text = ProjectImage._meta.get_field(
+    #         "project").help_text
+    #     self.assertEqual(
+    #         project_help_text,
+    #         "Project to which this image belongs.",
+    #     )
+
+    # def test_project_on_delete_cascade(self):
+    #     """
+    #     `ProjectImage` model `project` field `on_delete` should be
+    #     `models.CASCADE`.
+    #     """
+    #     project_on_delete = ProjectImage._meta.get_field(
+    #         "project")
+    #     self.assertEqual(
+    #         project_on_delete.remote_field.on_delete,
+    #         d_db_models.CASCADE
+    #     )
+
+    # def test_project_related_name(self):
+    #     """
+    #     `ProjectImage` model `project` field related name should be `images`.
+    #     """
+    #     project_related_name = ProjectImage._meta.get_field(
+    #         "project").related_query_name()
+    #     self.assertEqual(project_related_name, "images")
+
+    def test_image_field(self):
+        """
+        `ProjectImage` model `image` field should have the following
+        attributes:
+
+        - `verbose_name` should be "Image"
+        - `help_text` should be "Add an image of the project."
+        - `upload_to` should be "project_images/"
+        """
+        image_verbose_name = ProjectImage._meta.get_field(
+            "image"
+        ).verbose_name
+        self.assertEqual(image_verbose_name, "Image")
+        image_help_text = ProjectImage._meta.get_field(
+            "image"
+        ).help_text
+        self.assertEqual(image_help_text, "Add an image of the project.")
+        image_upload_to = ProjectImage._meta.get_field(
+            "image"
+        ).upload_to
+        self.assertEqual(image_upload_to, "project_images/")
+
+        def test_caption_field(self):
+            """
+            `ProjectImage` model `caption` field should have the following
+            attributes:
+
+            - `verbose_name` should be "Caption"
+            - `help_text` should be "Add a caption to the image."
+            - `blank` should be "True"
+            - `null` should be "True"
+            """
+            caption_verbose_name = ProjectImage._meta.get_field(
+                "caption"
+            ).verbose_name
+            self.assertEqual(caption_verbose_name, "Caption")
+            caption_help_text = ProjectImage._meta.get_field(
+                "caption"
+            ).help_text
+            self.assertEqual(
+                caption_help_text,
+                "Add a caption to the image.",
+            )
+            caption_blank = ProjectImage._meta.get_field(
+                "caption"
+            ).blank
+            self.assertTrue(caption_blank)
+            caption_null = ProjectImage._meta.get_field(
+                "caption"
+            ).null
+            self.assertTrue(caption_null)

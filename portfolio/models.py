@@ -113,3 +113,28 @@ class Project(TimestampMixin, models.Model):
         return ", ".join(
             technology.name for technology in self.technology.all()[:3]
         )
+
+
+class ProjectImage(TimestampMixin):
+    """
+    Model for project images.
+    """
+    project = models.ForeignKey(
+        Project,
+        verbose_name="Project",
+        help_text="Project to which this image belongs.",
+        on_delete=models.CASCADE,
+        related_name="images",
+    )
+    image = models.ImageField(
+        verbose_name="Image",
+        help_text="Add an image of the project.",
+        upload_to="project_images/",
+    )
+    caption = models.CharField(
+        verbose_name="Caption",
+        help_text="Caption for this image.",
+        max_length=100,
+        blank=True,
+        null=True,
+    )
