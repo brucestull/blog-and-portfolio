@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from portfolio.models import Technology, Project
+from portfolio.models import Technology, Project, ProjectImage
 
 
 @admin.register(Technology)
@@ -41,3 +41,19 @@ class ProjectAdmin(admin.ModelAdmin):
         Truncate `description` to 30 characters.
         """
         return obj.description[:30]
+
+
+@admin.register(ProjectImage)
+class ProjectImageAdmin(admin.ModelAdmin):
+    """
+    `ModelAdmin` class for the `ProjectImage` model.
+    """
+    list_display = (
+        "project",
+        "image",
+        "caption",
+    )
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
