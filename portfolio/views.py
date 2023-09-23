@@ -6,6 +6,8 @@ from django.views.generic.edit import (
 )
 from django.contrib.auth.mixins import UserPassesTestMixin
 
+from django.shortcuts import render, get_object_or_404
+
 from .mixins import RegistrationAcceptedMixin
 from .forms import ProjectForm
 from config.settings.common import THE_SITE_NAME
@@ -75,17 +77,20 @@ class ProjectListView(ListView):
         return context
 
 
-def technology_projects(request):
+def technology_projects(request, technology_id):
     """
     View to display projects by technology.
     """
-    # Get all technologies.
-    technologies = models.Technology.objects.all()
-    # Get all projects.
-    projects = models.Project.objects.all()
+    # Get the `Technology` object or return a 404 error.
+    technology = get_object_or_404(models.Technology, pk=technology_id)
+    # Get the `Project` objects associated with the `Technology` object.
+    projects = technology.projects.all()
+    # Create the context dictionary to pass to the template.
     context = {
-        "technologies": technologies,
-        "projects": projects,
+        "page_title": f"Projects using {technology.name}",
         "the_site_name": THE_SITE_NAME,
+        "technology": technology,
+        "projects": projects,
     }
+    # Render the template.
     return render(request, "portfolio/technology_projects.html", context)
