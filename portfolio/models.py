@@ -48,6 +48,16 @@ class Technology(TimestampMixin):
         """
         return self.name
 
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular technology instance, and
+        it's associated `Project`'s.
+        """
+        return reverse(
+            "portfolio:technology-projects",
+            kwargs={"technology_id": self.pk},
+        )
+
     class Meta:
         verbose_name_plural = "Technologies"
 
