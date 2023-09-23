@@ -73,3 +73,19 @@ class ProjectListView(ListView):
         context["page_title"] = "Projects"
         context["the_site_name"] = THE_SITE_NAME
         return context
+
+
+def technology_projects(request):
+    """
+    View to display projects by technology.
+    """
+    # Get all technologies.
+    technologies = models.Technology.objects.all()
+    # Get all projects.
+    projects = models.Project.objects.all()
+    context = {
+        "technologies": technologies,
+        "projects": projects,
+        "the_site_name": THE_SITE_NAME,
+    }
+    return render(request, "portfolio/technology_projects.html", context)
