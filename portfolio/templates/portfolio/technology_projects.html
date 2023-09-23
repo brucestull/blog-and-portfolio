@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ page_title }}
+    -
+    {{ the_site_name }}
+{% endblock title %}
+
+{% block content %}
+<h1>Projects Using {{ technology.name }}</h1>
+
+{% for project in projects %}
+    <h2><a href="{% url 'portfolio:project-detail' project.id %}">{{ project.title }}</a></h2>
+    <p>{{ project.description }}</p>
+{% endfor %}
+
+{% endblock content %}
