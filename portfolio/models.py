@@ -133,7 +133,7 @@ class ProjectImage(TimestampMixin):
     )
     caption = models.CharField(
         verbose_name="Caption",
-        help_text="Caption for this image.",
+        help_text="Add a caption to the image.",
         max_length=100,
         blank=True,
         null=True,
