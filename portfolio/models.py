@@ -25,7 +25,7 @@ class TimestampMixin(models.Model):
         abstract = True
 
 
-class Technology(TimestampMixin, models.Model):
+class Technology(TimestampMixin):
     """
     A Technology class is created to store information about a technology.
     """
@@ -52,7 +52,7 @@ class Technology(TimestampMixin, models.Model):
         verbose_name_plural = "Technologies"
 
 
-class Project(TimestampMixin, models.Model):
+class Project(TimestampMixin):
     """
     A Project class is created to store information about a project.
     """
