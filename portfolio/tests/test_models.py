@@ -515,32 +515,32 @@ class ProjectImageModelTest(TestCase):
         ).upload_to
         self.assertEqual(image_upload_to, "project_images/")
 
-        def test_caption_field(self):
-            """
-            `ProjectImage` model `caption` field should have the following
-            attributes:
+    def test_caption_field(self):
+        """
+        `ProjectImage` model `caption` field should have the following
+        attributes:
 
-            - `verbose_name` should be "Caption"
-            - `help_text` should be "Add a caption to the image."
-            - `blank` should be "True"
-            - `null` should be "True"
-            """
-            caption_verbose_name = ProjectImage._meta.get_field(
-                "caption"
-            ).verbose_name
-            self.assertEqual(caption_verbose_name, "Caption")
-            caption_help_text = ProjectImage._meta.get_field(
-                "caption"
-            ).help_text
-            self.assertEqual(
-                caption_help_text,
-                "Add a caption to the image.",
-            )
-            caption_blank = ProjectImage._meta.get_field(
-                "caption"
-            ).blank
-            self.assertTrue(caption_blank)
-            caption_null = ProjectImage._meta.get_field(
-                "caption"
-            ).null
-            self.assertTrue(caption_null)
+        - `verbose_name` should be "Caption"
+        - `help_text` should be "Add a caption to the image."
+        - `blank` should be "True"
+        - `null` should be "True"
+        """
+        caption_verbose_name = ProjectImage._meta.get_field(
+            "caption"
+        ).verbose_name
+        self.assertEqual(caption_verbose_name, "Caption")
+        caption_help_text = ProjectImage._meta.get_field(
+            "caption"
+        ).help_text
+        self.assertEqual(
+            caption_help_text,
+            "Add a caption to the image.",
+        )
+        caption_blank = ProjectImage._meta.get_field(
+            "caption"
+        ).blank
+        self.assertTrue(caption_blank)
+        caption_null = ProjectImage._meta.get_field(
+            "caption"
+        ).null
+        self.assertTrue(caption_null)
