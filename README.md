@@ -1,7 +1,5 @@
 # Bruce Stull's Portfolio and Blog Application
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/Y1ZCzLfk7VvFxn1NaACyjS/YHwVRm1rHjqJB5oscyffKF/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/Y1ZCzLfk7VvFxn1NaACyjS/YHwVRm1rHjqJB5oscyffKF/tree/main)
-
 ## Project Description
 
 ## Table of Contents
