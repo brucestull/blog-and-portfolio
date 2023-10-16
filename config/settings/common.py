@@ -157,5 +157,9 @@ THE_SITE_NAME = "FlynntKnapp"
 
 if ENVIRONMENT == "production":
     ALLOWED_HOSTS = ["flynnt-knapp-portfolio-e7f84c16765f.herokuapp.com"]
+    STATIC_ROOT = BASE_DIR / "static"
 else:
     ALLOWED_HOSTS = ["localhost"]
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]

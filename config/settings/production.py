@@ -5,8 +5,6 @@ from utils import get_database_config_variables
 
 MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
 
-STATIC_ROOT = BASE_DIR / "static"
-
 database_config_variables = get_database_config_variables(
     os.environ.get("DATABASE_URL")
 )
