@@ -9,11 +9,22 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
 import os
-
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+# Loads variables from .env
+load_dotenv()
+# Loads (and possibly overwrites) variables from .env.email
+load_dotenv(".env.email")
+
+# Get the value of the ENVIRONMENT environment variable, or use a default
+# value of "development" if it's not set
+ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
+
+# Set DEBUG based on the ENVIRONMENT value
+DEBUG = ENVIRONMENT != "production"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -142,5 +153,9 @@ AWS_MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 ########################################################################
 
-
 THE_SITE_NAME = "FlynntKnapp"
+
+if ENVIRONMENT == "production":
+    ALLOWED_HOSTS = ["flynnt-knapp-portfolio-e7f84c16765f.herokuapp.com"]
+else:
+    ALLOWED_HOSTS = ["localhost"]
