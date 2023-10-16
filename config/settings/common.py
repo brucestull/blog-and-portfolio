@@ -24,6 +24,8 @@ load_dotenv(".env.email")
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
 
 # Set DEBUG based on the ENVIRONMENT value
+# Set DEBUG `True` if ENVIRONMENT is not "production", otherwise set it to
+# `False`
 DEBUG = ENVIRONMENT != "production"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -155,11 +157,25 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 THE_SITE_NAME = "FlynntKnapp"
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+
 if ENVIRONMENT == "production":
     ALLOWED_HOSTS = ["flynnt-knapp-portfolio-e7f84c16765f.herokuapp.com"]
     STATIC_ROOT = BASE_DIR / "static"
+    # Create a specific `SECRET_KEY` for production and use it in production
+    # only.
+    SECRET_KEY = os.environ.get("SECRET_KEY")
 else:
     ALLOWED_HOSTS = ["localhost"]
     STATICFILES_DIRS = [
         BASE_DIR / "static",
     ]
+    SECRET_KEY = "django-insecure-mm8cx0al6wo$$0hhv3&eevzsst9dbw&(5p$#9k(1rx%e@j+=$l"  # noqa E501
+
+# To create a new `SECRET_KEY`:
+"""
+    python manage.py shell
+    from django.core.management.utils import get_random_secret_key
+    print(get_random_secret_key())
+"""
