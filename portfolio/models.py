@@ -120,15 +120,14 @@ class Project(TimestampMixin):
         """
         # Limit the number of technologies to 3 and then join them with
         # a comma and a space to form a string.
-        return ", ".join(
-            technology.name for technology in self.technology.all()[:3]
-        )
+        return ", ".join(technology.name for technology in self.technology.all()[:3])
 
 
 class ProjectImage(TimestampMixin):
     """
     Model for project images.
     """
+
     project = models.ForeignKey(
         Project,
         verbose_name="Project",
@@ -148,3 +147,12 @@ class ProjectImage(TimestampMixin):
         blank=True,
         null=True,
     )
+
+    def __str__(self):
+        """
+        String representation of ProjectImage.
+        """
+        return self.caption
+
+    class Meta:
+        verbose_name_plural = "Project Images"
