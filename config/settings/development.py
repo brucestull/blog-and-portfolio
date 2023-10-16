@@ -1,9 +1,6 @@
 import os
 from config.settings.common import *
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 DATABASES = {
     "default": {
@@ -11,7 +8,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
