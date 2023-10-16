@@ -1,11 +1,9 @@
 import os
-from dotenv import load_dotenv
 from config.settings.common import *
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
 
 DATABASES = {
     "default": {
@@ -14,8 +12,6 @@ DATABASES = {
     }
 }
 
-
-load_dotenv()
 
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
