@@ -17,6 +17,7 @@ django-storages = "==1.14"
 boto3 = "==1.28.43"
 flake8 = "==6.1.0"
 pytest-cov = "==4.1.0"
+isort = "*"
 
 [dev-packages]
 

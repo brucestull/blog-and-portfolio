@@ -2,13 +2,6 @@ import os
 from dotenv import load_dotenv
 from config.settings.common import *
 
-
-DEBUG = os.getenv("DEBUG", True)
-
-
-ALLOWED_HOSTS = ["localhost"]
-
-
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
