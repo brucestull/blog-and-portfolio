@@ -14,13 +14,17 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from utils import get_database_config_variables
+
 # Loads variables from .env
 load_dotenv()
-# Loads (and possibly overwrites) variables from .env.email
+# Loads variables from .env.email (and possibly overwrites) existing variables
 load_dotenv(".env.email")
 
+
 # Get the value of the ENVIRONMENT environment variable, or use a default
-# value of "development" if it's not set
+# value of "development" if it's not set.
+# This variable is used in logic below to set dev and prod settings.
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
 
 # Set DEBUG based on the ENVIRONMENT value
@@ -167,12 +171,31 @@ if ENVIRONMENT == "production":
     # only.
     SECRET_KEY = os.environ.get("SECRET_KEY")
     MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
+    database_config_variables = get_database_config_variables(
+        os.environ.get("DATABASE_URL")
+    )
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": database_config_variables["DATABASE_NAME"],
+            "HOST": database_config_variables["DATABASE_HOST"],
+            "PORT": database_config_variables["DATABASE_PORT"],
+            "USER": database_config_variables["DATABASE_USER"],
+            "PASSWORD": database_config_variables["DATABASE_PASSWORD"],
+        }
+    }
 else:
     ALLOWED_HOSTS = ["localhost"]
     STATICFILES_DIRS = [
         BASE_DIR / "static",
     ]
     SECRET_KEY = "django-insecure-mm8cx0al6wo$$0hhv3&eevzsst9dbw&(5p$#9k(1rx%e@j+=$l"  # noqa E501
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # To create a new `SECRET_KEY`:
 """
