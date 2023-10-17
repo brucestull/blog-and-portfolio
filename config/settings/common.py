@@ -166,6 +166,7 @@ if ENVIRONMENT == "production":
     # Create a specific `SECRET_KEY` for production and use it in production
     # only.
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
 else:
     ALLOWED_HOSTS = ["localhost"]
     STATICFILES_DIRS = [
