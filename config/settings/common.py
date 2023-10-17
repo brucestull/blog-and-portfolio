@@ -16,6 +16,8 @@ from dotenv import load_dotenv
 
 from utils import get_database_config_variables
 
+THE_SITE_NAME = "FlynntKnapp"
+
 # Loads variables from .env
 load_dotenv()
 # Loads variables from .env.email (and possibly overwrites) existing variables
@@ -144,6 +146,16 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 ########################################################################
+# Email settings:
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+########################################################################
+
+
+########################################################################
 # AWS settings:
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
@@ -158,8 +170,6 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 ########################################################################
-
-THE_SITE_NAME = "FlynntKnapp"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
