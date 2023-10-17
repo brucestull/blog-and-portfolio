@@ -1,9 +1,7 @@
 import os
 
-from config.settings.common import *
+from config.settings.common import *  # noqa F401
 from utils import get_database_config_variables
-
-MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
 
 database_config_variables = get_database_config_variables(
     os.environ.get("DATABASE_URL")
