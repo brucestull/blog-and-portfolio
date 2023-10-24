@@ -52,7 +52,7 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/flynnt-knapp.git $CIRCLE_SHA1:refs/heads/master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/flynnt-knapp-portfolio.git $CIRCLE_SHA1:refs/heads/master
           when: on_success
 
 workflows:
