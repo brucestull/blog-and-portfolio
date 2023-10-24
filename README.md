@@ -1,6 +1,6 @@
 # Bruce Stull's Portfolio and Blog Application
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/Y1ZCzLfk7VvFxn1NaACyjS/YHwVRm1rHjqJB5oscyffKF/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/circleci/Y1ZCzLfk7VvFxn1NaACyjS/YHwVRm1rHjqJB5oscyffKF/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/Y1ZCzLfk7VvFxn1NaACyjS/YHwVRm1rHjqJB5oscyffKF/tree/main.svg?style=shield&circle-token=5b73cc224d54045a371103c5ec5fe5a22510f1ed)](https://dl.circleci.com/status-badge/redirect/circleci/Y1ZCzLfk7VvFxn1NaACyjS/YHwVRm1rHjqJB5oscyffKF/tree/main)
 
 ## Project Description
 
