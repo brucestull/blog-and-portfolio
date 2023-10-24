@@ -9,11 +9,30 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
 import os
-
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+from utils import get_database_config_variables
+
+THE_SITE_NAME = "FlynntKnapp"
+
+# Loads variables from .env
+load_dotenv()
+# Loads variables from .env.email (and possibly overwrites) existing variables
+load_dotenv(".env.email")
+
+
+# Get the value of the ENVIRONMENT environment variable, or use a default
+# value of "development" if it's not set.
+# This variable is used in logic below to set dev and prod settings.
+ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
+
+# Set DEBUG based on the ENVIRONMENT value
+# Set DEBUG `True` if ENVIRONMENT is not "production", otherwise set it to
+# `False`
+DEBUG = ENVIRONMENT != "production"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -81,16 +100,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa E501
     },
 ]
 
@@ -127,6 +146,16 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 ########################################################################
+# Email settings:
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+########################################################################
+
+
+########################################################################
 # AWS settings:
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
@@ -142,5 +171,45 @@ AWS_MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 ########################################################################
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-THE_SITE_NAME = "FlynntKnapp"
+if ENVIRONMENT == "production":
+    ALLOWED_HOSTS = ["flynnt-knapp-portfolio-e7f84c16765f.herokuapp.com"]
+    STATIC_ROOT = BASE_DIR / "static"
+    # Create a specific `SECRET_KEY` for production and use it in production
+    # only.
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
+    database_config_variables = get_database_config_variables(
+        os.environ.get("DATABASE_URL")
+    )
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": database_config_variables["DATABASE_NAME"],
+            "HOST": database_config_variables["DATABASE_HOST"],
+            "PORT": database_config_variables["DATABASE_PORT"],
+            "USER": database_config_variables["DATABASE_USER"],
+            "PASSWORD": database_config_variables["DATABASE_PASSWORD"],
+        }
+    }
+else:
+    ALLOWED_HOSTS = ["localhost"]
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
+    SECRET_KEY = "django-insecure-mm8cx0al6wo$$0hhv3&eevzsst9dbw&(5p$#9k(1rx%e@j+=$l"  # noqa E501
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+
+# To create a new `SECRET_KEY`:
+"""
+    python manage.py shell
+    from django.core.management.utils import get_random_secret_key
+    print(get_random_secret_key())
+"""

@@ -23,7 +23,11 @@
         {% endif %}>
     <hr>
     {% for technology in project.technology.all %}
-        {{ technology.name}}{% if not forloop.last %} | {% endif %}
+        <a href="{% url 'portfolio:technology-projects' technology.id %}">
+            {{ technology.name}}
+            <i class="fas fa-info-circle"></i>
+        </a>
+        {% if not forloop.last %} | {% endif %}
     {% endfor %}
     <br>
     <br>

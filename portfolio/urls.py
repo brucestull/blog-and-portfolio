@@ -24,4 +24,9 @@ urlpatterns = [
         views.ProjectDetailView.as_view(),
         name="project-detail",
     ),
+    path(
+        "technologies/<int:technology_id>/projects/",
+        views.technology_projects,
+        name="technology-projects",
+    )
 ]

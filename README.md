@@ -1,18 +1,60 @@
 # Bruce Stull's Portfolio and Blog Application
 
+## Project Description
+
 ## Table of Contents
 
-* [Production Links](#production-links)
-* [Django Applications](#django-applications)
-* [Models](#models)
-    * [Blog](#blog)
-    * [Portfolio](#portfolio)
-* [Views](#views)
-* [Templates](#templates)
-* [Interesting Features](#interesting-features)
-* [New Knowledge](#new-knowledge)
-* [PyPI Packages](#pypi-packages)
-* [Page Layout Images](#page-layout-images)
+* [Screenshots and other Images](#screenshots-and-other-images)
+* [Technologies Used](#technologies-used)
+    * [PyPI Packages](#pypi-packages)
+* [Features](#features)
+* [Known Issues & Areas of Improvement](#known-issues--areas-of-improvement)
+* [Setup and Installation](#setup-and-installation)
+* [Usage](#usage)
+* [Contribution Guidelines](#contribution-guidelines)
+* [License](#license)
+* [Acknowledgements](#acknowledgements)
+* [Contact Information](#contact-information)
+
+## Screenshots and other Images
+
+## Technologies Used
+
+### PyPI Packages
+
+* <https://pypi.org/project/asgiref/>
+* <https://pypi.org/project/coverage/>
+* <https://pypi.org/project/django/>
+* <https://pypi.org/project/docutils/>
+* <https://pypi.org/project/gunicorn/>
+* <https://pypi.org/project/pillow/>
+* <https://pypi.org/project/pip/>
+* <https://pypi.org/project/psycopg2/>
+* <https://pypi.org/project/python-dotenv/>
+* <https://pypi.org/project/setuptools/>
+* <https://pypi.org/project/sqlparse/>
+* <https://pypi.org/project/tzdata/>
+* <https://pypi.org/project/wheel/>
+* <https://pypi.org/project/whitenoise/>
+
+## Features
+
+## Known Issues & Areas of Improvement
+
+## Setup and Installation
+
+## Usage
+
+## Contribution Guidelines
+
+## License
+
+## Acknowledgements
+
+## Contact Information
+
+
+
 
 ## Production Links
 
@@ -29,33 +71,13 @@
   ![Flynnt Knapp Portfolio Blog QR Code](https://github.com/brucestull/blog-and-portfolio/assets/47562501/b0441b38-7f80-462a-a975-30a2d0a16364)
 
 
-## Development Links
-
-* <http://localhost:8000/>
-* <http://localhost:8000/admin/>
-* <http://localhost:8000/portfolio/projects/create/>
-* <http://localhost:8000/portfolio/projects/>
-* <http://localhost:8000/portfolio/projects/1/>
-
 ## Django Applications
-
-* `blog`
-* `portfolio`
 
 ## Models
 
 ### Blog
 
 ### Portfolio
-
-* `Project`
-    * `title`
-    * `description`
-    * `technology`
-    * `image`
-* `Technology`
-    * `name`
-    * `description`
 
 ## Views
 
@@ -73,23 +95,6 @@
 1. `TimestampMixin` class
     * COMMENTS
     * CODE
-
-## PyPI Packages
-
-* <https://pypi.org/project/asgiref/>
-* <https://pypi.org/project/coverage/>
-* <https://pypi.org/project/django/>
-* <https://pypi.org/project/docutils/>
-* <https://pypi.org/project/gunicorn/>
-* <https://pypi.org/project/pillow/>
-* <https://pypi.org/project/pip/>
-* <https://pypi.org/project/psycopg2/>
-* <https://pypi.org/project/python-dotenv/>
-* <https://pypi.org/project/setuptools/>
-* <https://pypi.org/project/sqlparse/>
-* <https://pypi.org/project/tzdata/>
-* <https://pypi.org/project/wheel/>
-* <https://pypi.org/project/whitenoise/>
 
 ## Page Layout Images
 

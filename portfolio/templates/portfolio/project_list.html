@@ -25,7 +25,10 @@
                     <h5 class="card-title">{{ project.title }}</h5>
                     <p class="card-text">
                         {% for technology in project.technology.all %}
-                            {{ technology }}
+                            <a href="{% url 'portfolio:technology-projects' technology.id %}">
+                                {{ technology.name }}
+                                <i class="fas fa-info-circle"></i>
+                            </a>
                             {% if not forloop.last %} | {% endif %}
                         {% endfor %}
                     </p>

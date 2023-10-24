@@ -25,7 +25,7 @@ class TimestampMixin(models.Model):
         abstract = True
 
 
-class Technology(TimestampMixin, models.Model):
+class Technology(TimestampMixin):
     """
     A Technology class is created to store information about a technology.
     """
@@ -48,11 +48,21 @@ class Technology(TimestampMixin, models.Model):
         """
         return self.name
 
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular technology instance, and
+        it's associated `Project`'s.
+        """
+        return reverse(
+            "portfolio:technology-projects",
+            kwargs={"technology_id": self.pk},
+        )
+
     class Meta:
         verbose_name_plural = "Technologies"
 
 
-class Project(TimestampMixin, models.Model):
+class Project(TimestampMixin):
     """
     A Project class is created to store information about a project.
     """
@@ -110,6 +120,39 @@ class Project(TimestampMixin, models.Model):
         """
         # Limit the number of technologies to 3 and then join them with
         # a comma and a space to form a string.
-        return ", ".join(
-            technology.name for technology in self.technology.all()[:3]
-        )
+        return ", ".join(technology.name for technology in self.technology.all()[:3])
+
+
+class ProjectImage(TimestampMixin):
+    """
+    Model for project images.
+    """
+
+    project = models.ForeignKey(
+        Project,
+        verbose_name="Project",
+        help_text="Project to which this image belongs.",
+        on_delete=models.CASCADE,
+        related_name="images",
+    )
+    image = models.ImageField(
+        verbose_name="Image",
+        help_text="Add an image of the project.",
+        upload_to="project_images/",
+    )
+    caption = models.CharField(
+        verbose_name="Caption",
+        help_text="Add a caption to the image.",
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        """
+        String representation of ProjectImage.
+        """
+        return self.caption
+
+    class Meta:
+        verbose_name_plural = "Project Images"
