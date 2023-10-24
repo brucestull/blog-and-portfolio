@@ -25,10 +25,10 @@ jobs:
       - run:
           name: run tests and coverage
           command: |
-            pipenv run coverage run --source='.' --omit="*/asgi.py,*/wsgi.py,*/manage.py" ./manage.py test
+            pipenv run coverage run --source='.' ./manage.py test
             pipenv run coverage report
 
-deploy:
+  deploy:
     docker:
       - image: cimg/python:3.11.5
     parallelism: 3
