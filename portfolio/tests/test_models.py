@@ -277,6 +277,41 @@ class ProjectTest(TestCase):
         description_null = Project._meta.get_field("description").null
         self.assertTrue(description_null)
 
+    def test_repository_url_verbose_name(self):
+        """
+        `Project` model `repository_url` field label should be
+        `repository_url`.
+        """
+        repository_url_verbose_name = Project._meta.get_field(
+            "repository_url"
+        ).verbose_name
+        self.assertEqual(repository_url_verbose_name, "Repository URL")
+
+    def test_repository_url_help_text(self):
+        """
+        `Project` model `repository_url` field help text should be
+        "Enter the URL of the project's repository.".
+        """
+        repository_url_help_text = Project._meta.get_field("repository_url").help_text
+        self.assertEqual(
+            repository_url_help_text,
+            "Enter the URL of the project's repository.",
+        )
+
+    def test_repository_url_blank_true(self):
+        """
+        `Project` model `repository_url` field `blank` should be `True`.
+        """
+        repository_url_blank = Project._meta.get_field("repository_url").blank
+        self.assertTrue(repository_url_blank)
+
+    def test_repository_url_null_true(self):
+        """
+        `Project` model `repository_url` field `null` should be `True`.
+        """
+        repository_url_null = Project._meta.get_field("repository_url").null
+        self.assertTrue(repository_url_null)
+
     def test_technology_verbose_name(self):
         """
         `Project` model `technology` field label should be `technology`.

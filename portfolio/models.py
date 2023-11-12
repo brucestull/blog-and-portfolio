@@ -85,6 +85,12 @@ class Project(TimestampMixin):
         blank=True,
         null=True,
     )
+    repository_url = models.URLField(
+        verbose_name="Repository URL",
+        help_text="Enter the URL of the project's repository.",
+        blank=True,
+        null=True,
+    )
     technology = models.ManyToManyField(
         Technology,
         verbose_name="Technologies",
