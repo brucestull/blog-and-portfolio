@@ -2,11 +2,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.db import models as d_db_models
 
-from blog.models import (
-    Category,
-    Post,
-    Comment
-)
+from blog.models import Category, Post, Comment
 
 
 class CategoryModelTest(TestCase):
@@ -35,10 +31,7 @@ class CategoryModelTest(TestCase):
         date_created_verbose_name = Category._meta.get_field(
             "date_created"
         ).verbose_name
-        self.assertEqual(
-            date_created_verbose_name,
-            "Date the Category was created"
-        )
+        self.assertEqual(date_created_verbose_name, "Date the Category was created")
 
     def test_date_created_auto_now_add_true(self):
         """
@@ -94,26 +87,19 @@ class PostModelTest(TestCase):
         """
         `date_posted` verbose_name should be 'Date the Post was posted'.
         """
-        date_posted_verbose_name = Post._meta.get_field(
-            "date_posted"
-        ).verbose_name
-        self.assertEqual(
-            date_posted_verbose_name,
-            "Date the Post was posted"
-        )
+        date_posted_verbose_name = Post._meta.get_field("date_posted").verbose_name
+        self.assertEqual(date_posted_verbose_name, "Date the Post was posted")
 
     def test_date_posted_auto_now_add_true(self):
         """
         `date_posted` auto_now_add should be True.
         """
-        date_posted_auto_now_add = Post._meta.get_field(
-            "date_posted"
-        ).auto_now_add
+        date_posted_auto_now_add = Post._meta.get_field("date_posted").auto_now_add
         self.assertTrue(date_posted_auto_now_add)
 
     def test_author_uses_settings_auth_user_model(self):
         """
-        `author` should use `config.settings.common.AUTH_USER_MODEL`
+        `author` should use `config.settings.AUTH_USER_MODEL`
         (`CustomUser`).
         """
         author_field = Post._meta.get_field("author")
@@ -131,10 +117,7 @@ class PostModelTest(TestCase):
         `author` on_delete should be CASCADE.
         """
         author_field = Post._meta.get_field("author")
-        self.assertEqual(
-            author_field.remote_field.on_delete,
-            d_db_models.CASCADE
-        )
+        self.assertEqual(author_field.remote_field.on_delete, d_db_models.CASCADE)
 
     def test_categories_uses_category_model(self):
         """
@@ -192,19 +175,14 @@ class PostModelTest(TestCase):
         self.post.categories.add(self.category4)
         self.assertEqual(
             self.post.display_categories(),
-            (
-                "Test Category 1, Test Category 2, "
-                "Test Category 3, Test Category 4"
-            )
+            ("Test Category 1, Test Category 2, " "Test Category 3, Test Category 4"),
         )
 
     def test_display_categories_short_description(self):
         """
         `display_categories` short_description should be 'Categories'.
         """
-        display_categories_short_description = (
-            Post.display_categories.short_description
-        )
+        display_categories_short_description = Post.display_categories.short_description
         self.assertEqual(display_categories_short_description, "Categories")
 
     def test_get_absolute_url_method(self):
@@ -218,10 +196,7 @@ class PostModelTest(TestCase):
             password="MeowMeow42",
         )
         self.post = Post.objects.create(author=self.author, title="Test Post")
-        self.assertEqual(
-            self.post.get_absolute_url(),
-            f"/blog/{self.post.pk}/"
-        )
+        self.assertEqual(self.post.get_absolute_url(), f"/blog/{self.post.pk}/")
 
 
 class CommentModelTest(TestCase):
@@ -240,9 +215,7 @@ class CommentModelTest(TestCase):
         """
         `post` related_name should be 'comments'.
         """
-        post_related_name = Comment._meta.get_field(
-            "post"
-        ).related_query_name()
+        post_related_name = Comment._meta.get_field("post").related_query_name()
         self.assertEqual(post_related_name, "comments")
 
     def test_post_on_delete_cascade(self):
@@ -250,10 +223,7 @@ class CommentModelTest(TestCase):
         `post` on_delete should be CASCADE.
         """
         post_field = Comment._meta.get_field("post")
-        self.assertEqual(
-            post_field.remote_field.on_delete,
-            d_db_models.CASCADE
-        )
+        self.assertEqual(post_field.remote_field.on_delete, d_db_models.CASCADE)
 
     def test_author_max_length(self):
         """
@@ -273,21 +243,14 @@ class CommentModelTest(TestCase):
         """
         `date_posted` verbose_name should be 'Date the Comment was posted'.
         """
-        date_posted_verbose_name = Comment._meta.get_field(
-            "date_posted"
-        ).verbose_name
-        self.assertEqual(
-            date_posted_verbose_name,
-            "Date the Comment was posted"
-        )
+        date_posted_verbose_name = Comment._meta.get_field("date_posted").verbose_name
+        self.assertEqual(date_posted_verbose_name, "Date the Comment was posted")
 
     def test_date_posted_auto_now_add_true(self):
         """
         `date_posted` auto_now_add should be True.
         """
-        date_posted_auto_now_add = Comment._meta.get_field(
-            "date_posted"
-        ).auto_now_add
+        date_posted_auto_now_add = Comment._meta.get_field("date_posted").auto_now_add
         self.assertTrue(date_posted_auto_now_add)
 
     def test_dunder_string_method(self):
@@ -299,19 +262,9 @@ class CommentModelTest(TestCase):
             email="DezziKitten@meowmeow.scratch",
             password="MeowMeow42",
         )
-        self.post_09_char = Post.objects.create(
-            author=self.author,
-            title="Test Post"
-        )
+        self.post_09_char = Post.objects.create(author=self.author, title="Test Post")
         self.post_23_char = Post.objects.create(
-            author=self.author,
-            title="Test Post - 23 chars"
+            author=self.author, title="Test Post - 23 chars"
         )
-        self.assertEqual(
-            str(self.post_09_char),
-            "Test Post"
-        )
-        self.assertEqual(
-            str(self.post_23_char),
-            "Test Post - 23 chars"[:20]
-        )
+        self.assertEqual(str(self.post_09_char), "Test Post")
+        self.assertEqual(str(self.post_23_char), "Test Post - 23 chars"[:20])
