@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .mixins import RegistrationAcceptedMixin
 from .forms import ProjectForm
-from config.settings.common import THE_SITE_NAME
+from config.settings import THE_SITE_NAME
 from . import models
 
 

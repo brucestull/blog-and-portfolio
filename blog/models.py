@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from config.settings.common import AUTH_USER_MODEL
+from config.settings import AUTH_USER_MODEL
 
 
 class Category(models.Model):
@@ -59,9 +59,7 @@ class Post(models.Model):
         """
         Returns a comma-separated list of first 4 `blog.Category` names.
         """
-        return ", ".join(
-            [category.name for category in self.categories.all()[:4]]
-        )
+        return ", ".join([category.name for category in self.categories.all()[:4]])
 
     display_categories.short_description = "Categories"
 
