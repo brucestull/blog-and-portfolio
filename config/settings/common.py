@@ -18,6 +18,8 @@ from utils import get_database_config_variables
 
 THE_SITE_NAME = "FlynntKnapp"
 
+LOCATION_OF_THIS_VARIABLE = "config/settings/common.py"
+
 # Loads variables from .env
 load_dotenv()
 # Loads variables from .env.email (and possibly overwrites) existing variables
