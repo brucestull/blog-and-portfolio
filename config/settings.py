@@ -177,7 +177,8 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 if ENVIRONMENT == "production":
-    ALLOWED_HOSTS = ["flynnt-knapp-portfolio-e7f84c16765f.herokuapp.com"]
+    # ALLOWED_HOSTS = ["flynnt-knapp-portfolio-e7f84c16765f.herokuapp.com"]
+    ALLOWED_HOSTS = [os.getenv("THIS_HOST")]
     STATIC_ROOT = BASE_DIR / "static"
     # Create a specific `SECRET_KEY` for production and use it in production
     # only.
