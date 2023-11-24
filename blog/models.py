@@ -59,9 +59,7 @@ class Post(models.Model):
         """
         Returns a comma-separated list of first 4 `blog.Category` names.
         """
-        return ", ".join(
-            [category.name for category in self.categories.all()[:4]]
-        )
+        return ", ".join([category.name for category in self.categories.all()[:4]])
 
     display_categories.short_description = "Categories"
 
