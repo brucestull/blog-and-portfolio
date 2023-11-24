@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from config.settings.common import THE_SITE_NAME
+from config.settings import THE_SITE_NAME
 from blog.models import Post, Comment
 from blog.forms import CommentForm
 

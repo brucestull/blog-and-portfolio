@@ -99,7 +99,7 @@ class PostModelTest(TestCase):
 
     def test_author_uses_settings_auth_user_model(self):
         """
-        `author` should use `config.settings.common.AUTH_USER_MODEL`
+        `author` should use `config.settings.AUTH_USER_MODEL`
         (`CustomUser`).
         """
         author_field = Post._meta.get_field("author")
