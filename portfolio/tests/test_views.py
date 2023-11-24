@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from config.settings.common import THE_SITE_NAME
+from config.settings import THE_SITE_NAME
 
 from accounts.models import CustomUser
 
