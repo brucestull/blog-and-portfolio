@@ -51,10 +51,10 @@ class CategoryModelTest(TestCase):
 
     def test_verbose_name_plural(self):
         """
-        `verbose_name_plural` should be 'Categorie(s)'.
+        `verbose_name_plural` should be 'Categories'.
         """
         verbose_name_plural = Category._meta.verbose_name_plural
-        self.assertEqual(verbose_name_plural, "Categorie(s)")
+        self.assertEqual(verbose_name_plural, "Categories")
 
 
 class PostModelTest(TestCase):
