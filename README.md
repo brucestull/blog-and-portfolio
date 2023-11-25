@@ -22,23 +22,6 @@
 
 ## Technologies Used
 
-### PyPI Packages
-
-* <https://pypi.org/project/asgiref/>
-* <https://pypi.org/project/coverage/>
-* <https://pypi.org/project/django/>
-* <https://pypi.org/project/docutils/>
-* <https://pypi.org/project/gunicorn/>
-* <https://pypi.org/project/pillow/>
-* <https://pypi.org/project/pip/>
-* <https://pypi.org/project/psycopg2/>
-* <https://pypi.org/project/python-dotenv/>
-* <https://pypi.org/project/setuptools/>
-* <https://pypi.org/project/sqlparse/>
-* <https://pypi.org/project/tzdata/>
-* <https://pypi.org/project/wheel/>
-* <https://pypi.org/project/whitenoise/>
-
 ## Features
 
 ## Known Issues & Areas of Improvement
