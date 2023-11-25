@@ -66,11 +66,11 @@
 
 * Portfolio Projects QR Code:
 
-  ![Flynnt Knapp Portfolio Projects QR Code](https://github.com/brucestull/blog-and-portfolio/assets/47562501/6a57aade-d077-4de2-97ec-50033b1ca64e)
+  <ADD_IMAGE_LATER>
 
 * Portfolio Blog QR Code:
 
-  ![Flynnt Knapp Portfolio Blog QR Code](https://github.com/brucestull/blog-and-portfolio/assets/47562501/b0441b38-7f80-462a-a975-30a2d0a16364)
+  <ADD_IMAGE_LATER>
 
 
 ## Django Applications
