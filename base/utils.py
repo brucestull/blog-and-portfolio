@@ -1,13 +1,13 @@
-from accounts.models import CustomUser
 import os
 import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
+from accounts.models import CustomUser
 
-USERNAME = "FlynntKnapp"
+USERNAME = "FlipJohnson"
 PASSWORD = "1234test"
-EMAIL = "FlynntKnapp@email.app"
+EMAIL = "FlipJohnson@email.app"
 
 
 def create_a_super_user(username, password, email):
