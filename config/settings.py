@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -201,7 +202,10 @@ else:
     STATICFILES_DIRS = [
         BASE_DIR / "static",
     ]
-    SECRET_KEY = "django-insecure-mm8cx0al6wo$$0hhv3&eevzsst9dbw&(5p$#9k(1rx%e@j+=$l"
+    SECRET_KEY = os.environ.get(
+        "SECRET_KEY",
+        "django-insecure-mm8cx0al6wo$$0hhv3&eevzsst9dbw&(5p$#9k(1rx%e@j+=$l",
+    )
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
