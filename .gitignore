@@ -147,6 +147,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Keep .env.example in the repository, but ignore .env
+!.env.example
+
 # Spyder project settings
 .spyderproject
 .spyproject
