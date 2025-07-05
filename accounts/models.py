@@ -1,3 +1,4 @@
+# accounts/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -11,8 +12,7 @@ class CustomUser(AbstractUser):
     registration_accepted = models.BooleanField(
         verbose_name="Registration Accepted",
         help_text=(
-            "Designates whether user's registration has been accepted "
-            "by an admin."
+            "Designates whether user's registration has been accepted " "by an admin."
         ),
         default=False,
     )

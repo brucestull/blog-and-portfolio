@@ -1,4 +1,4 @@
-.PHONY: clean test makemigrations migrate makemigrate runserver createsu shell delete_db loaddata resetdb seed help
+.PHONY: clean test makemigrations migrate makemigrate runserver createsu shell delete_db loaddata reset_db seed help
 
 # Clean python, pytest, and coverage files
 clean:
@@ -58,7 +58,7 @@ loaddata:
 	python manage.py loaddata fixtures/initial_data.json
 
 # Delete the database and reload Storager SortDecision data
-resetdb:
+reset_db:
 	rm -f db.sqlite3
 	echo "Database and caches cleared."
 	make makemigrate

@@ -72,7 +72,7 @@ class ProjectListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Projects"
+        context["page_title"] = "Flynnt Projects"
         context["the_site_name"] = THE_SITE_NAME
         return context
 
